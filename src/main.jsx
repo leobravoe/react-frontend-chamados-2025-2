@@ -11,6 +11,9 @@ import ChamadosCreate from './pages/chamados/ChamadosCreate.jsx';
 import ChamadosShow from './pages/chamados/ChamadosShow.jsx';
 import ChamadosEdit from './pages/chamados/ChamadosEdit.jsx';
 
+import UsuariosLogin from './pages/usuarios/UsuariosLogin.jsx';
+import UsuariosRegister from './pages/usuarios/UsuariosRegister.jsx';
+
 const router = createBrowserRouter(
     [
         { path: "/", element: <App /> },
@@ -21,6 +24,9 @@ const router = createBrowserRouter(
         { path: "/chamados/create", element: <ChamadosCreate /> },
         { path: "/chamados/:id", element: <ChamadosShow /> },
         { path: "/chamados/:id/edit", element: <ChamadosEdit /> },
+
+        { path: "/usuarios/login", element: <UsuariosLogin /> },
+        { path: "/usuarios/register", element: <UsuariosRegister /> },
     ]
 );
 
