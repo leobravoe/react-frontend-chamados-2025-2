@@ -16,7 +16,7 @@ const UsuarioFormRegister = () => {
         }
         console.log(dadosParaEnviar);
         console.log(JSON.stringify(dadosParaEnviar));
-        const res = await fetch("localhost:3000/api/usuarios/register",{
+        const res = await fetch("http://localhost:3000/api/usuarios/register",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
