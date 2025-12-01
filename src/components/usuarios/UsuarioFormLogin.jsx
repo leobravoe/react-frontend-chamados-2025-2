@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import Toast from '../Toast';
 
 const UsuarioFormLogin = () => {
-    const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [error, setError] = useState(null);
@@ -11,14 +11,11 @@ const UsuarioFormLogin = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const dadosParaEnviar = {
-            nome,
             email,
             senha
         }
-        console.log(dadosParaEnviar);
-        console.log(JSON.stringify(dadosParaEnviar));
         try {
-            const res = await fetch("http://localhost:3000/api/usuarios/register", {
+            const res = await fetch("http://localhost:3000/api/usuarios/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -40,17 +37,8 @@ const UsuarioFormLogin = () => {
 
     return (
         <div className='m-2'>
+            {error && <Toast error={error} setError={setError} />}
             <form onSubmit={handleSubmit}>
-                <div className="mb-2">
-                    <label htmlFor="id-input-nome" className="form-label">Nome</label>
-                    <input
-                        type="text"
-                        id="id-input-nome"
-                        className="form-control"
-                        value={nome}
-                        onChange={(e) => setNome(e.target.value)}
-                    />
-                </div>
                 <div className="mb-2">
                     <label htmlFor="id-input-email" className="form-label">E-mail</label>
                     <input
@@ -59,6 +47,7 @@ const UsuarioFormLogin = () => {
                         className="form-control"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
                 </div>
                 <div className="mb-2">
@@ -69,10 +58,11 @@ const UsuarioFormLogin = () => {
                         className="form-control"
                         value={senha}
                         onChange={(e) => setSenha(e.target.value)}
+                        required
                     />
                 </div>
                 <div>
-                    <button type="submit" className='btn btn-primary'>Registar</button>
+                    <button type="submit" className='btn btn-primary'>Entrar</button>
                 </div>
             </form>
         </div>

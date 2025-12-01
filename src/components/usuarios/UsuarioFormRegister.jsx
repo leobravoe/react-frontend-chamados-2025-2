@@ -16,8 +16,6 @@ const UsuarioFormRegister = () => {
             email,
             senha
         }
-        console.log(dadosParaEnviar);
-        console.log(JSON.stringify(dadosParaEnviar));
         try {
             const res = await fetch("http://localhost:3000/api/usuarios/register", {
                 method: "POST",
@@ -51,6 +49,7 @@ const UsuarioFormRegister = () => {
                         className="form-control"
                         value={nome}
                         onChange={(e) => setNome(e.target.value)}
+                        required
                     />
                 </div>
                 <div className="mb-2">
@@ -61,6 +60,7 @@ const UsuarioFormRegister = () => {
                         className="form-control"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
                     />
                 </div>
                 <div className="mb-2">
@@ -71,6 +71,7 @@ const UsuarioFormRegister = () => {
                         className="form-control"
                         value={senha}
                         onChange={(e) => setSenha(e.target.value)}
+                        required
                     />
                 </div>
                 <div>
