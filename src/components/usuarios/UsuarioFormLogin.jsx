@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import Toast from '../Toast';
 
-const UsuarioFormRegister = () => {
+const UsuarioFormLogin = () => {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -41,7 +40,6 @@ const UsuarioFormRegister = () => {
 
     return (
         <div className='m-2'>
-            {error && <Toast />}
             <form onSubmit={handleSubmit}>
                 <div className="mb-2">
                     <label htmlFor="id-input-nome" className="form-label">Nome</label>
@@ -81,4 +79,4 @@ const UsuarioFormRegister = () => {
     )
 }
 
-export default UsuarioFormRegister
+export default UsuarioFormLogin
