@@ -41,7 +41,7 @@ const UsuarioFormRegister = () => {
 
     return (
         <div className='m-2'>
-            {error && <Toast />}
+            {error && <Toast error={error} setError={setError} />}
             <form onSubmit={handleSubmit}>
                 <div className="mb-2">
                     <label htmlFor="id-input-nome" className="form-label">Nome</label>
