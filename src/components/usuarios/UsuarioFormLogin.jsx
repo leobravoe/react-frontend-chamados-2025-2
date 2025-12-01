@@ -22,13 +22,16 @@ const UsuarioFormLogin = () => {
                 },
                 body: JSON.stringify(dadosParaEnviar),
             });
+            const data = await res.json();
             if (!res.ok)
             {
-                const data = await res.json();
                 throw new Error(`Algo deu errado. ${data.erro}`);
             }
             else
+            {
+                sessionStorage.setItem("at", data.access_token);
                 navigate("/");
+            }
         } catch (error) {
             setError(error.message);
         }
