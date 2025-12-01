@@ -5,6 +5,7 @@ const UsuarioFormRegister = () => {
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -16,16 +17,25 @@ const UsuarioFormRegister = () => {
         }
         console.log(dadosParaEnviar);
         console.log(JSON.stringify(dadosParaEnviar));
-        const res = await fetch("http://localhost:3000/api/usuarios/register",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dadosParaEnviar),
-        });
-        if(!res.ok)
-            console.log("Deu algum erro");
-        navigate("/");
+        try {
+            const res = await fetch("http://localhost:3000/api/usuarios/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dadosParaEnviar),
+            });
+            if (!res.ok)
+            {
+                const data = await res.json();
+                throw new Error(`Algo deu errado. ${data.erro}`);
+            }
+            else
+                navigate("/");
+        } catch (error) {
+            setError(error.message);
+        }
+
     }
 
     return (
