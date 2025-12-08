@@ -9,6 +9,9 @@ const ChamadosIndex = () => {
             try {
                 // Requisição para rota protegida 
                 const res = await authFetch("http://localhost:3000/api/chamados");
+                if(!res.ok)
+                    throw new Error("Algo errado aconteceu");
+                console.log("deu tudo certo");
             } catch (error) {
                 console.log(error);
             }

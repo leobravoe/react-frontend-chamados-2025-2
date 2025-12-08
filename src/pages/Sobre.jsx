@@ -1,8 +1,12 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 const Sobre = () => {
   return (
-    <div>Sobre</div>
+    <div>
+      <Navbar />
+      <h1>Sobre</h1>
+    </div>
   )
 }
 

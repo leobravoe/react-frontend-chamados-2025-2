@@ -23,6 +23,7 @@ const UsuarioFormRegister = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(dadosParaEnviar),
+                credentials: "include",
             });
             if (!res.ok)
             {

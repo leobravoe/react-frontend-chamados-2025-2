@@ -21,6 +21,7 @@ const UsuarioFormLogin = () => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(dadosParaEnviar),
+                credentials: "include", 
             });
             const data = await res.json();
             if (!res.ok)
