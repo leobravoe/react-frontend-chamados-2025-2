@@ -4,7 +4,7 @@ import { jwtDecode } from "jwt-decode";
 
 const AuthContext = createContext({
     user: null,
-    setUser: () => { },
+    setUser: (u) => { user = u },
     authLoading: true,
 });
 

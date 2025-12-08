@@ -16,6 +16,7 @@ import ChamadosEdit from './pages/chamados/ChamadosEdit.jsx';
 
 import UsuariosLogin from './pages/usuarios/UsuariosLogin.jsx';
 import UsuariosRegister from './pages/usuarios/UsuariosRegister.jsx';
+import { AuthProvider } from './auth/AuthContext.jsx'
 
 const router = createBrowserRouter(
     [
@@ -34,7 +35,9 @@ const router = createBrowserRouter(
 );
 
 createRoot(document.getElementById('root')).render(
-    <StrictMode>
+    // <StrictMode>
+    <AuthProvider>
         <RouterProvider router={router} />
-    </StrictMode>,
+    </AuthProvider>
+    // </StrictMode>,
 )
