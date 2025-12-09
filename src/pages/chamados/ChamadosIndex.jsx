@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuthFetch } from '../../auth/useAuthFetch';
 import { useAuth } from '../../auth/useAuth';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const ChamadosIndex = () => {
     const [chamados, setChamados] = useState([]);
@@ -39,10 +39,11 @@ const ChamadosIndex = () => {
 
     return (
         <div>
+            <Link to="/chamados/create" className="btn btn-primary">Criar Chamado</Link>
             {
                 chamados.map(
                     chamado =>
-                        <div>
+                        <div key={chamado.id}>
                             {chamado.id} - {chamado.texto} - {chamado.estado}
                         </div>
                 )
