@@ -10,9 +10,4 @@ const useAuth = () => {
     return context; // { user, setUser, authLoading }
 };
 
-const useCurrentUser = () => {
-    const { user } = useAuth();
-    return user;
-};
-
-export { useAuth, useCurrentUser };
+export { useAuth };

@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuthFetch } from '../../auth/useAuthFetch';
 import { useAuth } from '../../auth/useAuth';
 import { Navigate } from 'react-router-dom';
 
 const ChamadosIndex = () => {
+    const [chamados, setChamados] = useState([]);
     const authFetch = useAuthFetch();
     const auth = useAuth();
 
@@ -16,6 +17,9 @@ const ChamadosIndex = () => {
                 if (!res.ok)
                     throw new Error("Algo errado aconteceu");
                 console.log("deu tudo certo");
+                const data = await res.json();
+                setChamados(data);
+                console.log(data);
             } catch (error) {
                 console.log(error);
             }
@@ -35,7 +39,14 @@ const ChamadosIndex = () => {
 
     return (
         <div>
-            <p>Chamados list...</p>
+            {
+                chamados.map(
+                    chamado =>
+                        <div>
+                            {chamado.id} - {chamado.texto} - {chamado.estado}
+                        </div>
+                )
+            }
         </div>
     )
 }
