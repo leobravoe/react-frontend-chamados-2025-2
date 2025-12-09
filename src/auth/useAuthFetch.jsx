@@ -43,44 +43,46 @@ const useAuthFetch = () => {
             // 1ª tentativa de requisição
             let res = await fetch(url, { ...baseOptions, headers });
 
-            // Se NÃO for 401, devolve a resposta imediatamente (200/201/204/403/404/500, etc.)
-            if (res.status !== 401) {
-                return res;
-            }
-
-            // 401 → tenta renovar o access token usando o refresh token (cookie HttpOnly)
-            const refreshRes = await fetch(`${API_BASE_URL}/api/usuarios/refresh`, {
-                method: "POST",
-                credentials: "include", // envia cookie HttpOnly do refresh
-                signal,
-            });
-
-            // Falha ao renovar (ex.: refresh expirado/inválido) → limpa access token e vai para login
-            if (!refreshRes.ok) {
-                sessionStorage.removeItem("at");
-                navigate("/usuarios/login", { replace: true });
-                return res; // mantém a Response 401 original
-            }
-
-            // Tenta extrair o novo access token do corpo da resposta do /refresh
-            const data = await refreshRes.json().catch(() => ({}));
-            const newAccessToken = data?.access_token;
-
-            // Se não veio token, trata como sessão inválida/expirada
-            if (!newAccessToken) {
-                sessionStorage.removeItem("at");
-                navigate("/usuarios/login", { replace: true });
-                return res;
-            }
-
-            // Guarda o novo access token e refaz a requisição original **apenas uma vez**
-            sessionStorage.setItem("at", newAccessToken);
-            headers.set("Authorization", `Bearer ${newAccessToken}`);
-
-            // 2ª tentativa (após refresh bem-sucedido)
-            res = await fetch(url, { ...baseOptions, headers });
-
             return res;
+
+            // // Se NÃO for 401, devolve a resposta imediatamente (200/201/204/403/404/500, etc.)
+            // if (res.status !== 401) {
+            //     return res;
+            // }
+
+            // // 401 → tenta renovar o access token usando o refresh token (cookie HttpOnly)
+            // const refreshRes = await fetch(`${API_BASE_URL}/api/usuarios/refresh`, {
+            //     method: "POST",
+            //     credentials: "include", // envia cookie HttpOnly do refresh
+            //     signal,
+            // });
+
+            // // Falha ao renovar (ex.: refresh expirado/inválido) → limpa access token e vai para login
+            // if (!refreshRes.ok) {
+            //     sessionStorage.removeItem("at");
+            //     navigate("/usuarios/login", { replace: true });
+            //     return res; // mantém a Response 401 original
+            // }
+
+            // // Tenta extrair o novo access token do corpo da resposta do /refresh
+            // const data = await refreshRes.json().catch(() => ({}));
+            // const newAccessToken = data?.access_token;
+
+            // // Se não veio token, trata como sessão inválida/expirada
+            // if (!newAccessToken) {
+            //     sessionStorage.removeItem("at");
+            //     navigate("/usuarios/login", { replace: true });
+            //     return res;
+            // }
+
+            // // Guarda o novo access token e refaz a requisição original **apenas uma vez**
+            // sessionStorage.setItem("at", newAccessToken);
+            // headers.set("Authorization", `Bearer ${newAccessToken}`);
+
+            // // 2ª tentativa (após refresh bem-sucedido)
+            // res = await fetch(url, { ...baseOptions, headers });
+
+            // return res;
         },
         [navigate] // se o navigate mudar, a função é recriada
     );
